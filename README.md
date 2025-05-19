@@ -1,0 +1,1 @@
+Read all the videos i sent in the gc before asking a question
