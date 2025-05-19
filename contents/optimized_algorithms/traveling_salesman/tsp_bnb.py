@@ -9,19 +9,21 @@ from contents.algorithms.traveling_salesman.tsp_util import (
     display_results,
     log_passes
 )   
+import time
 
 def branch_and_bound_tsp(cities, distance_matrix, constraints):
     best_route = None
     min_cost = float('inf')
     valid_pass_count = 0
     all_routes = []
+    total_array_calls = 0
 
     # Handle constraints
     start_city = constraints.get('must_start', cities[0])
     remaining_cities = [c for c in cities if c != start_city]
 
     def backtrack(current_route, current_cost, remaining_cities):
-        nonlocal best_route, min_cost, valid_pass_count, all_routes
+        nonlocal best_route, min_cost, valid_pass_count, all_routes, total_array_calls
 
         # Base case: all cities visited, return to start
         if not remaining_cities:
@@ -30,6 +32,7 @@ def branch_and_bound_tsp(cities, distance_matrix, constraints):
 
             all_routes.append((final_route, final_cost))
             valid_pass_count += 1
+            total_array_calls += 1
 
             if final_cost < min_cost:
                 min_cost = final_cost
@@ -41,6 +44,7 @@ def branch_and_bound_tsp(cities, distance_matrix, constraints):
             # Calculate new cost
             last_city = current_route[-1]
             new_cost = current_cost + distance_matrix[cities.index(last_city)][cities.index(next_city)]
+            total_array_calls += 1
 
             # Prune if this path can't possibly be better
             if new_cost >= min_cost:
@@ -57,7 +61,7 @@ def branch_and_bound_tsp(cities, distance_matrix, constraints):
     backtrack([start_city], 0, remaining_cities)
 
     log_passes(valid_pass_count, "Branch and Bound")
-    return all_routes, best_route, min_cost
+    return all_routes, best_route, min_cost, total_array_calls
 
 def main():
     print("=== Traveling Salesman Problem Solver (Branch and Bound - Hamiltonian Cycle) ===")
@@ -68,11 +72,13 @@ def main():
     # Get constraints
     constraints = get_constraints(cities)
 
-    # Solve TSP using branch and bound
-    all_routes, best_route, min_cost = branch_and_bound_tsp(cities, distance_matrix, constraints)
+    # Solve TSP using branch and bound (with timing)
+    start_time = time.perf_counter()
+    all_routes, best_route, min_cost, array_calls = branch_and_bound_tsp(cities, distance_matrix, constraints)
+    runtime = time.perf_counter() - start_time
 
     # Display results
-    display_results(all_routes, best_route, min_cost)
+    display_results(all_routes, best_route, min_cost, runtime=runtime, total_array_calls=array_calls)
 
 if __name__ == "__main__":
     main()
