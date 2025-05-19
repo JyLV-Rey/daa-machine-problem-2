@@ -1,0 +1,129 @@
+\subsection{Traveling Salesman}
+\subsubsection{Description}
+
+In the theory of computational complexity, the traveling salesman problem (TSP) asks the following question: ``Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city?'' It is an NP-hard problem in combinatorial optimization, important in theoretical computer science and operations research.
+
+\textbf{We can express the following}
+
+Let \( U \) be the set of all nodes in the graph \( G = (U, E) \), where the relationship between nodes \( i \) and \( j \) is represented by a two-dimensional weight matrix \( G[i][j] \), defined as:
+
+\begin{itemize}
+    \item \( G[i][j] > 0 \) denotes the weight of the directed edge from node \( i \) to node \( j \),
+    \item \( G[i][j] = 0 \) indicates that there is no edge from node \( i \) to node \( j \).
+\end{itemize}
+
+Given a starting node \( n \in U \), the goal is to find a Hamiltonian cycle \( C \), defined as an ordered sequence of nodes:
+\[
+C = (n = v_1, v_2, \ldots, v_k = n)
+\]
+such that:
+
+\begin{enumerate}[label=(\alph*)]
+    \item Each node \( v_i \in U \) is visited exactly once (except for the start/end node \( n \), which appears twice),
+    \item \( G[v_i][v_{i+1}] > 0 \) for all consecutive pairs \( (v_i, v_{i+1}) \in C \), i.e., there exists a valid edge between each pair,
+    \item The cycle is complete and returns to the starting node \( n \),
+    \item The total weight
+    \[
+    \sum_{i=1}^{k-1} G[v_i][v_{i+1}]
+    \]
+    is minimized.
+\end{enumerate}
+
+Equivalently, this can be viewed as finding a collection of cardinality-2 subsets \( S = \{ \{v_i, v_{i+1}\} \} \) that form a closed, transitive path through all nodes in \( U \), beginning and ending at node \( n \), such that the total weight of the path is minimized.
+
+% PSEUDOCODE
+
+\subsubsection{Pseudocode}
+Given the following definition above, we can form the following algorithm
+\begin{algorithm}[H]
+\caption{Brute Force Hamiltonian Cycle Search on Graph $G = (U, E)$}
+\begin{algorithmic}
+\Require $G$ is an $|U| \times |U|$ weight matrix with $G[i][j] > 0$ for edges, 0 otherwise
+\Require $n \in U$ is the starting node (assumed index 0 for simplicity)
+\Ensure Hamiltonian cycle $C$ minimizing total weight
+
+\State $N \gets |U|$
+\State $cities \gets U \setminus \{n\}$ \Comment{all nodes except start $n$}
+\State $all\_perms \gets []$
+
+\\
+\Procedure{GeneratePermutations}{arr, start}
+    \If{$start = |arr|$}
+        \State append a copy of $arr$ to $all\_perms$
+        \State \Return
+    \EndIf
+    \For{$i = start$ to $|arr| - 1$}
+        \State swap $arr[start] \leftrightarrow arr[i]$
+        \State \Call{GeneratePermutations}{arr, start + 1}
+        \State swap $arr[start] \leftrightarrow arr[i]$ \Comment{backtrack}
+    \EndFor
+\EndProcedure
+
+\\
+\State \Call{\textbf{GeneratePermutations}}{cities, 0}
+
+\State $C^{*} \gets \text{null}$
+\State $min\_weight \gets +\infty$
+
+\ForAll{permutation $P \in all\_perms$}
+    \State $C \gets (n) + P$ \Comment{construct cycle starting at $n$}
+    \State $total\_weight \gets 0$
+    \State validCycle $\gets$ true
+    \For{$i = 1$ to $|C| - 1$}
+        \If{$G[C[i]][C[i+1]] = 0$} \Comment{no edge exists}
+            \State validCycle $\gets$ false
+            \State \textbf{break}
+        \Else
+            \State $total\_weight \gets total\_weight + G[C[i]][C[i+1]]$
+        \EndIf
+    \EndFor
+    \If{$validCycle$ \textbf{and} $G[C[-1]][n] > 0$}
+        \State $total\_weight \gets total\_weight + G[C[-1]][n]$ \Comment{close cycle}
+        \If{$total\_weight < min\_weight$}
+            \State $min\_weight \gets total\_weight$
+            \State $C^{*} \gets C + (n)$ \Comment{complete cycle}
+        \EndIf
+    \EndIf
+\EndFor
+
+\State \Return $C^{*}, min\_weight$
+
+\end{algorithmic}
+\end{algorithm}
+
+\pagebreak
+\textbf{Function Descriptions}
+
+\paragraph{GeneratePermutations(arr, start)} 
+Recursively generates all possible orderings (permutations) of the array \texttt{arr}, beginning from index \texttt{start}. This function is used to compute every valid sequence of the remaining nodes (i.e., $U \setminus \{n\}$) that may form a Hamiltonian cycle.
+
+\paragraph{BruteForceTSP($G$, $n$)} 
+This is the main procedure that attempts to find the minimum-cost Hamiltonian cycle starting and ending at node $n$. It performs the following steps:
+
+\begin{enumerate}
+    \item Initializes the list of nodes excluding the starting node $n$.
+    \item Generates all permutations of the remaining nodes using \texttt{GeneratePermutations}.
+    \item For each permutation $P$, constructs a candidate cycle $C = (n) + P + (n)$.
+    \item Checks whether each consecutive edge $G[v_i][v_{i+1}] > 0$ exists.
+    \item If the cycle is valid, computes its total weight.
+    \item Retains the cycle with the minimum total weight found.
+\end{enumerate}
+
+\paragraph{Total Weight Calculation}
+For each valid cycle $C = (v_1, v_2, \ldots, v_k = v_1)$, the total weight is calculated as:
+\[
+\text{weight}(C) = \sum_{i=1}^{k-1} G[v_i][v_{i+1}]
+\]
+This includes the final return edge $G[v_{k-1}][v_k]$ to complete the cycle.
+
+\subsection*{Correctness and Complexity}
+
+This brute-force method guarantees correctness because it checks all possible permutations of nodes, ensuring that the optimal Hamiltonian cycle (if one exists) is found. However, it has factorial time complexity:
+\[
+\mathcal{O}((|U| - 1)!)
+\]
+which becomes computationally infeasible for large $|U|$.
+
+\begin{center}
+    $x = x+3$
+\end{center}
