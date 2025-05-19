@@ -61,22 +61,26 @@ def get_constraints(cities):
 def calculate_route_cost(route, cities, distance_matrix):
     """Calculate total distance for a given route"""
     total = 0
+    array_calls = 0
     city_indices = [cities.index(city) for city in route]
 
+    # Sum distances between consecutive cities
     for i in range(len(city_indices) - 1):
         from_idx = city_indices[i]
         to_idx = city_indices[i+1]
         total += distance_matrix[from_idx][to_idx]
+        array_calls += 1
 
     # Add return to starting city
     if len(route) == len(cities) + 1 and route[0] == route[-1]:
         from_idx = city_indices[-1]
         to_idx = city_indices[0]
         total += distance_matrix[from_idx][to_idx]
+        array_calls += 1 
 
-    return total
+    return total, array_calls
 
-def display_results(all_routes, best_route, min_cost, passes=None, algorithm_name=None):
+def display_results(all_routes, best_route, min_cost, passes=None, algorithm_name=None, runtime=None, total_array_calls=None):
     """Display all valid routes, the optimal one, and optionally pass count"""
     print("\n=== All Valid Routes ===")
     for route, cost in all_routes:
@@ -91,6 +95,12 @@ def display_results(all_routes, best_route, min_cost, passes=None, algorithm_nam
     # Print passes if provided
     if passes is not None and algorithm_name:
         log_passes(passes, algorithm_name)
+    
+    # Print runtime and array accesses
+    if runtime is not None:
+        print(f"\nTotal runtime: {runtime:.6f} seconds")
+    if total_array_calls is not None:
+        print(f"Total distance matrix accesses: {total_array_calls}")
 
 def log_passes(count, algorithm_name):
     """Print the number of passes for a specific algorithm"""
