@@ -8,7 +8,7 @@ from contents.algorithms.traveling_salesman.tsp_util import (
     get_constraints,
     display_results,
     log_passes
-)
+)   
 
 def branch_and_bound_tsp(cities, distance_matrix, constraints):
     best_route = None

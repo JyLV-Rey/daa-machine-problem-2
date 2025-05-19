@@ -7,18 +7,29 @@ from tsp_util import (
 )
 
 def generate_permutations(cities, constraints):
-    """Generate permutations for TSP where route starts and ends at same city"""
+    """Generate permutations for TSP where route starts and ends at the same city"""
     cities = cities.copy()
 
     # If start city is specified
     if constraints.get('must_start'):
         start_city = constraints['must_start']
         cities.remove(start_city)
+
         # Generate all permutations of remaining cities
-        from itertools import permutations
-        for perm in permutations(cities):
+        for perm in permute(cities):
             yield [start_city] + list(perm) + [start_city]
         return
+
+def permute(cities):
+    """Generate all permutations of the list of cities using recursion."""
+    if len(cities) == 0:
+        yield []
+    else:
+        for i in range(len(cities)):
+            city = cities[i]
+            remaining_cities = cities[:i] + cities[i+1:]
+            for perm in permute(remaining_cities):
+                yield [city] + perm
 
 def brute_tsp(cities, distance_matrix, constraints):
     all_routes = []
