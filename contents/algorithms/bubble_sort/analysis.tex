@@ -1,0 +1,25 @@
+\subsection{Bubble Sort}
+\subsubsection{Analysis}
+
+The worst-case of Bubble Sort occurs when elements are in reversed order. In such a situation, the total number of passes is exhausted or at a maximum of (n-1) times, where n is the number of elements.
+\begin{itemize}
+    \item Pass 1: Number of Comparisons = (n-1), number of swaps = (n-1)
+    \item Pass 2: Number of Comparisons = (n-2), number of swaps = (n-2)    \item Pass 3: Number of Comparisons = (n-3), number of swaps = (n-3)\\
+    .\\
+    .\\
+    .
+\item Pass (n-1): Number of Comparisons = (1), number of swaps = (1)
+\end{itemize}
+
+Calculating the total number of comparisons required to sort the array:
+\begin{center}
+    \begin{align*}
+        &= (n-1)\ +\ (n-2)\ + (n-3)\ +\dots\ + 2\ +\ 1\\
+        &= \frac{(n-1)(n-1+1)}{2}\tag{\textit{by the Sum of Natural Numbers}}\\
+        &= \frac{n(n-1)}{2}\\
+        &= \frac{n^2 - n}{2}\\
+        &= \textbf{\(O(n^2)\)}
+    \end{align*}
+\end{center}
+
+Therefore, the worst-case time complexity is \(O(n^2)\).

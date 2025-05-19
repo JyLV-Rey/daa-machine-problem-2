@@ -1,0 +1,105 @@
+\documentclass[a4paper, 11pt]{article}
+
+% Cleaned and Sorted Package Declarations (Longest Name to Shortest)
+\usepackage{algpseudocode}
+\usepackage{indentfirst}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{ragged2e}
+\usepackage{algorithm}
+\usepackage{hyphenat}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{url}
+
+% --------------------------------------
+% command for adding images
+% \addImageWithSize{size}{caption}{location}
+%
+% example:
+% \addImageWithSize{3}{Bubble Sort Simulation}{img/simulation.png}
+\newcommand{\addImageWithSize}[3]
+{
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=#1\textwidth]{#3}
+        \caption{#2}
+    \end{figure}
+}
+
+% --------------------------------------
+
+% page margins
+\geometry{left=.5in, right=.5in, top=.5in, bottom=.5in}
+
+% line spacing to 1.5
+\onehalfspacing%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+
+% headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+
+% cool footer
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{Group 2 | BSCS 2--4}
+
+% title part
+\title{\textbf{Brute Force Algorithms Review}}
+\author{Group 2}
+\date{May 2025}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+
+    {\Large \textbf{COSC 203: Design and Analysis of Algorithms} \par}
+    \vspace{1cm}
+
+    {\LARGE \textbf{Machine Problem \#2} \par}
+    \vspace{0.5cm}
+    
+    {\Large Brute Force Review and Implementation \par}
+    \vspace{2cm}
+
+    {\large May 21, 2025 \par}
+    \vspace{2cm}
+
+    {\large \textbf{Submitted by:} \par}
+    {\large \textbf{GROUP 5} \par}
+    {\large Shikina Cabral \par}    
+    {\large Luis Miguel Dela Cruz \par}
+    {\large Matan John Exconde \par}
+    {\large Jorelle Cybee Lenar \par}
+    {\large Frances Lorraine Montemayor \par}
+    {\large Jen Patrick Nataba \par}
+    {\large John Eric Samillano \par}
+    {\large Princess Padauan \par}
+    {\large Jyeshua Rey Velasco \par}
+    \vspace{1cm}
+
+    {\large \textbf{Submitted to:} \par}
+    {\large Instr. Chris Piamonte \par}
+
+\end{titlepage}
+
+\tableofcontents
+
+
+
+\end{document}
+
+
+% J. Velasco, J.P. Nataba, S. Cabral, E. Samilliano, P. Padauan, J.C.Y. Leñar, L.M. Dela Cruz, M. Exconde
