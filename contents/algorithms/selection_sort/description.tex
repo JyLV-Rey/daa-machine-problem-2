@@ -1,0 +1,40 @@
+\subsection{Selection Sort}
+
+% DESCRIPTION
+\subsubsection{Description}
+
+Selection Sort is a sorting algorithm that works by finding the smallest (or largest) item in the unsorted part of a list and swapping it with the first unsorted item. It keeps doing this until the entire list is sorted.
+
+Selection Sort works by dividing the list into two parts: the sorted portion on the left and the unsorted portion on the right. In each iteration, it scans the unsorted section to find the minimum element and swaps it with the leftmost unsorted element, thereby expanding the sorted section by one.
+
+Selection Sort is easy to understand and implement, making it a good choice for teaching sorting concepts. However, like Bubble Sort, it is inefficient on large datasets due to its quadratic time complexity. It performs the same number of comparisons regardless of the initial order of the elements and is not adaptive.
+
+When sorting elements in ascending order, Selection Sort starts at the first index, searches for the smallest element in the entire list, and swaps it with the first element. Then it moves to the second index, finds the next smallest element, swaps it into position, and so on until the array is sorted. 
+
+% PSEUDOCODE
+\subsubsection{Pseudocode}
+\begin{algorithm}
+\caption{Traditional Selection Sort}
+\begin{algorithmic}[1]
+\Procedure{SelectionSort}{arr, length}
+    \For{$i \gets 0$ to $length - 2$}
+        \State $minIndex \gets i$
+        
+        \Comment{Find the index of the minimum element}
+        \For{$j \gets i + 1$ to $length - 1$}
+            \If{$arr[j] < arr[minIndex]$}
+                \State $minIndex \gets j$
+            \EndIf
+        \EndFor
+
+        \Comment{Swap the minimum element with current}
+        \State \Call{Swap}{$arr[i], arr[minIndex]$}
+    \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+The Selection Sort algorithm sorts an array using two nested loops. The outer loop iterates from the start of the array up to the second to last element, performing n-1 passes for an array of n items to fully sort it. \\
+During each pass, the algorithm initially considers the first unsorted element to be the smallest and records its index. The inner loop then checks the remaining unsorted elements to find if any are smaller. If a smaller element is found, its index is updated.\\
+Once the inner loop finishes, the algorithm swaps the smallest found element with the first unsorted element of the current pass, placing it in its correct sorted position.\\
+
+

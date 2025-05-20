@@ -1,0 +1,59 @@
+\subsection{Optimized Selection Sort}
+
+% DESCRIPTION
+\subsubsection{Description}
+
+The algorithm is optimized using a combination of different optimization techniques. Although selection sort is known for its simplicity, it is often criticized for its O(n²) time complexity and inefficient behavior on already or partially sorted data. To address this, we incorporate three key improvements: min-max selection, conditional swapping, and early exit detection.
+
+
+The first optimization is the use of Min-Max selection, which allows the algorithm to find both the smallest and largest elements in a single pass through the unsorted portion of the array. Instead of locating only the minimum and placing it at the beginning like in traditional selection sorting, this approach also finds the maximum and places it at the end. This dual-selection approach reduces the number of iterations required since two elements are sorted per pass rather than one. The next optimization used is conditional swapping, which ensures that no swap is performed if the element is already in its correct position. This helps avoid unnecessary operations and ensures that the algorithm only makes changes when truly needed. For instance, if the minimum element is already at the beginning of the unsorted segment, the swap is skipped. The same logic is applied to the maximum element at the end of the segment. The last optimization technique is early exit detection. This algorithm checks whether any swap occurred during each iteration. If no swap occurs during an iteration, which means that the array is already sorted, the algorithm exits early, avoiding any further unnecessary iterations. 
+
+
+
+% PSEUDOCODE
+\subsubsection{Pseudocode}
+\begin{algorithm}
+\caption{Optimized Selection Sort}
+\begin{algorithmic}[1]
+\Procedure{OptimizedSelectionSort}{arr, length}
+    \For{$i \gets 0$ to $(\text{length} \div 2) - 1$}
+        \State $minIndex \gets i$
+        \State $maxIndex \gets i$
+        \State $didSwap \gets \textbf{false}$
+        
+        \Comment{Find the min and max in the unsorted portion}
+        \For{$j \gets i + 1$ to $\text{length} - i - 1$}
+            \If{$arr[j] < arr[minIndex]$}
+                \State $minIndex \gets j$
+            \EndIf
+            \If{$arr[j] > arr[maxIndex]$}
+                \State $maxIndex \gets j$
+            \EndIf
+        \EndFor
+
+        \Comment{Swap min element into position if needed}
+        \If{$minIndex \neq i$}
+            \State \Call{Swap}{$arr[i], arr[minIndex]$}
+            \State $didSwap \gets \textbf{true}$
+        \EndIf
+
+        \Comment{Update maxIndex if it was affected by the min swap}
+        \If{$maxIndex == i$}
+            \State $maxIndex \gets minIndex$
+        \EndIf
+
+        \Comment{Swap max element into position if needed}
+        \If{$maxIndex \neq \text{length} - i - 1$}
+            \State \Call{Swap}{$arr[\text{length} - i - 1], arr[maxIndex]$}
+            \State $didSwap \gets \textbf{true}$
+        \EndIf
+
+        \Comment{Early exit if no swaps occurred}
+        \If{$\neg didSwap$}
+            \State \textbf{break}
+        \EndIf
+    \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+This optimized version reduces the number of passes needed by simultaneously locating both the smallest and largest elements in the unsorted portion of the array and swapping them into their respective positions at the start and end. The algorithm works from both ends towards the center of the array. For each iteration of the outer loop, it sets minIndex and maxIndex to the current i, then scans the unsorted portion to find the new minimum and maximum. If these are not already in place, it swaps them accordingly. A check is included to update maxIndex in case it was pointing to the position i and was affected by the earlier minimum swap. The didSwap flag ensures that the algorithm can exit early if no swaps were necessary, which indicates the array is already sorted

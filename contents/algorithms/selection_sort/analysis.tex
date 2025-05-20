@@ -1,0 +1,43 @@
+\subsection{Analysis}
+
+% DESCRIPTION
+\subsubsection{Worst-Case Time Complexity Analysis of Selection Sort}
+The worst-case of \textbf{Selection Sort} occurs regardless of the initial order of the elements (whether reversed, sorted, or random order), since the algorithm performs the same number of comparisons in every case.
+
+In Selection Sort, during each pass, the smallest (or largest) element from the unsorted part of the array is selected and swapped with the element at the current position.
+
+\begin{itemize}
+    \item Pass 1: Number of Comparisons = $(n-1)$, Number of Swaps = $1$
+    \item Pass 2: Number of Comparisons = $(n-2)$, Number of Swaps = $1$
+    \item Pass 3: Number of Comparisons = $(n-3)$, Number of Swaps = $1$
+    \item[] $\vdots$
+    \item Pass $(n-1)$: Number of Comparisons = $1$, Number of Swaps = $1$
+\end{itemize}
+
+\textbf{Calculating the total number of comparisons required to sort the array:}
+\begin{center}
+    \begin{align*}
+        &= (n - 1) + (n - 2) + (n - 3) + \dots + 2 + 1 \\
+        &= \frac{(n - 1)(n - 1 + 1)}{2} \\
+        &= \frac{n(n - 1)}{2} \\
+        &= \frac{n^2 - n}{2} \\
+        &= \textbf{\(O(n^2)\)}
+    \end{align*}
+\end{center}
+
+\textbf{Calculating the total number of swaps (worst case):}
+\begin{center}
+    \begin{align*}
+        &= \text{1 swap per pass} \\
+        &= (n - 1) \text{ passes} \\
+        &= \textbf{\(O(n)\)}
+    \end{align*}
+\end{center}
+
+\bigskip
+
+\noindent
+\textbf{Therefore, the worst-case time complexity is:}
+\[
+\mathcal{O}(n^2)
+\]

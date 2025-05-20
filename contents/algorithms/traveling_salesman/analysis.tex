@@ -1,3 +1,43 @@
-\subsubsection{Simulation}
+\subsubsection{Analysis}
 
-\addImageWithSize{}{}{}
+Manually analyzing the time complexity per line in the traditional runtime analysis would be a painstalking chore to do. We will use a different approach to compute for the time complexity of the entire algorithm.
+
+\paragraph{1. Permutation Generation} 
+
+Let \( N = |U| \) be the number of vertices. The algorithm generates all permutations of the \( N - 1 \) remaining nodes (excluding the starting node). This in itself is a permutation expansion as $N$ increases:
+\[
+\text{Number of permutations} = (N - 1)!
+\]
+After generating each permutation, we then analyze that each permutation takes \( O(N) \) time to construct a full cycle \textit{(including appending the starting node at the beginning and end)}. So, the total time for generating and iterating over all permutations is:
+\[
+T_1 = O((N - 1)!)
+\]
+\paragraph{2. Validity Check and Cost Computation}
+
+For each permutation, we must:
+
+\begin{itemize}
+    \item Check if all consecutive pairs \( (C[i], C[i+1]) \) exist: this takes \( O(N) \) time
+    \item Compute the total cost of the path, including the edge back to the start: also \( O(N) \) time
+\end{itemize}
+
+Therefore, each permutation costs \( O(N) \) time to validate and compute the total weight:
+\[
+T_2 = O(N)
+\]
+
+\paragraph{3. Total Time Complexity}
+
+The total runtime is:
+\[
+    T(N) = O((N - 1)! \cdot N)
+\]
+Picking the most significant term, we get:
+\[
+    O(N \cdot (N - 1)!)
+\]
+After discarding the coefficinents, this Hamiltonian Cycle search algorithm has factorial time complexity:
+\[
+\boxed{O(N!)}
+\]
+This is expected, as the problem it solves (Hamiltonian Cycle / TSP) is NP-Hard, and brute force checks all possible tours.
