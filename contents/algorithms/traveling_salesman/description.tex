@@ -1,7 +1,7 @@
 \subsection{Travelling Salesman}
 \subsubsection{Description}
 
-In the theory of computational complexity, the travelling salesman problem (TSP) asks the following question: "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city?" It is an NP-hard problem in combinatorial optimization, important in theoretical computer science and operations research.
+In the theory of computational complexity, the travelling salesman problem (TSP) asks the following question: ``Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city? '' It is an NP-hard problem in combinatorial optimization, important in theoretical computer science and operations research.
 
 \textbf{We can express the following}
 
@@ -18,7 +18,7 @@ C = (n = v_1, v_2, \ldots, v_k = n)
 \]
 such that:
 
-\begin{enumerate}[label=(\alph*)]
+\begin{enumerate}[label= (\alph*)]
     \item Each node \( v_i \in U \) is visited exactly once (except for the start/end node \(  n \), which appears twice),
     \item \( G[v_i][v_{i+1}] > 0 \) for all consecutive pairs \( (v_i, v_{i+1}) \in C \), i.e., there exists a valid edge between each pair,
     \item The cycle is complete and returns to the starting node \( n \),
@@ -35,69 +35,70 @@ Equivalently, this can be viewed as finding a collection of cardinality-2 subset
 
 \subsubsection{Pseudocode}
 Given the following definition above, we can form the following algorithm
+
 \begin{algorithm}[H]
-\caption{Brute Force Hamiltonian Cycle Search on Graph $G = (U, E)$}
-\begin{algorithmic}
-\Require $G$ is an $|U| \times |U|$ weight matrix with $G[i][j] > 0$ for edges, 0 otherwise
-\Require $n \in U$ is the starting node (assumed index 0 for simplicity)
-\Ensure Hamiltonian cycle $C$ minimizing total weight
-
-\State $N \gets |U|$
-\State $cities \gets U \setminus \{n\}$ \Comment{all nodes except start $n$}
-\State $all\_perms \gets []$
-
-\\
-\Procedure{GeneratePermutations}{arr, start}
-    \If{$start = |arr|$}
-        \State append a copy of $arr$ to $all\_perms$
-        \State \Return
-    \EndIf
-    \For{$i = start$ to $|arr| - 1$}
-        \State swap $arr[start] \leftrightarrow arr[i]$
-        \State \Call{GeneratePermutations}{arr, start + 1}
-        \State swap $arr[start] \leftrightarrow arr[i]$ \Comment{backtrack}
-    \EndFor
-\EndProcedure
-
-\\
-\State \Call{\textbf{GeneratePermutations}}{cities, 0}
-
-\State $C^{*} \gets \text{null}$
-\State $min\_weight \gets +\infty$
-
-\ForAll{permutation $P \in all\_perms$}
-    \State $C \gets (n) + P$ \Comment{construct cycle starting at $n$}
-    \State $total\_weight \gets 0$
-    \State validCycle $\gets$ true
-    \For{$i = 1$ to $|C| - 1$}
-        \If{$G[C[i]][C[i+1]] = 0$} \Comment{no edge exists}
-            \State validCycle $\gets$ false
-            \State \textbf{break}
-        \Else
-            \State $total\_weight \gets total\_weight + G[C[i]][C[i+1]]$
-        \EndIf
-    \EndFor
-    \If{$validCycle$ \textbf{and} $G[C[-1]][n] > 0$}
-        \State $total\_weight \gets total\_weight + G[C[-1]][n]$ \Comment{close cycle}
-        \If{$total\_weight < min\_weight$}
-            \State $min\_weight \gets total\_weight$
-            \State $C^{*} \gets C + (n)$ \Comment{complete cycle}
-        \EndIf
-    \EndIf
-\EndFor
-
-\State \Return $C^{*}, min\_weight$
-
-\end{algorithmic}
-\end{algorithm}
+    \caption{Brute Force Hamiltonian Cycle Search on Graph $G = (U, E)$}
+    \begin{algorithmic}
+    \Require{} $G$ is an $|U| \times |U|$ weight matrix with $G[i][j] > 0$ for edges, 0 otherwise
+    \Require{} $n \in U$ is the starting node (assumed index 0 for simplicity)
+    \Ensure{} Hamiltonian cycle $C$ minimizing total weight
+    
+    \State{} $N \gets |U|$
+    \State{} $cities \gets U \setminus \{n\}$ \Comment{all nodes except start $n$}
+    \State{} $all\_perms \gets []$
+    
+    \\
+    \Procedure{GeneratePermutations}{arr, start}
+        \If{$start = |arr|$}
+            \State{} append a copy of $arr$ to $all\_perms$
+            \State{} \Return{}
+        \EndIf{}
+        \For{$i = start$ to $|arr| - 1$}
+            \State{} swap $arr[start] \leftrightarrow arr[i]$
+            \State{} \Call{GeneratePermutations}{arr, start + 1}
+            \State{} swap $arr[start] \leftrightarrow arr[i]$ \Comment{backtrack}
+        \EndFor{}
+    \EndProcedure{}
+    
+    \\
+    \State{} \textbf{GeneratePermutations} (cities, 0)
+    
+    \State{} $C^{*} \gets \text{null}$
+    \State{} $\min\_weight \gets +\infty$
+    
+    \ForAll{permutation $P \in all\_perms$}
+        \State{} $C \gets (n) + P$ \Comment{construct cycle starting at $n$}
+        \State{} $total\_weight \gets 0$
+        \State{} validCycle $\gets$ true
+        \For{$i = 1$ to $|C| - 1$}
+            \If{$G[C[i]][C[i+1]] = 0$} \Comment{no edge exists}
+                \State{} validCycle $\gets$ false
+                \State{} \textbf{break}
+            \Else{}
+                \State{} $total\_weight \gets total\_weight + G[C[i]][C[i+1]]$
+            \EndIf{}
+        \EndFor{}
+        \If{$validCycle$ \textbf{and} $G[C[-1]][n] > 0$}
+            \State{} $total\_weight \gets total\_weight + G[C[-1]][n]$ \Comment{close cycle}
+            \If{$total\_weight < \min\_weight$}
+                \State{} $\min\_weight \gets total\_weight$
+                \State{} $C^{*} \gets C + (n)$ \Comment{complete cycle}
+            \EndIf{}
+        \EndIf{}
+    \EndFor{}
+    
+    \State{} \Return{} $C^{*}, \min\_weight$
+    
+    \end{algorithmic}
+    \end{algorithm}
 
 \pagebreak
 \textbf{Function Descriptions}
 
-\paragraph{GeneratePermutations(arr, start)} 
+\paragraph{GeneratePermutations (arr, start)} 
 Recursively generates all possible orderings (permutations) of the array \texttt{arr}, beginning from index \texttt{start}. This function is used to compute every valid sequence of the remaining nodes (i.e., $U \setminus \{n\}$) that may form a Hamiltonian cycle.
 
-\paragraph{BruteForceTSP($G$, $n$)} 
+\paragraph{BruteForceTSP ($G$, $n$)} 
 This is the main procedure that attempts to find the minimum-cost Hamiltonian cycle starting and ending at node $n$. It performs the following steps:
 
 \begin{enumerate}

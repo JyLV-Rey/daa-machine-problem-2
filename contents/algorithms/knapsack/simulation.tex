@@ -1,0 +1,25 @@
+\subsubsection{Simulation}
+
+We are given a set of three items, each with an associated weight and value. The objective is to select a combination of these items that maximizes the total value without exceeding the capacity of the knapsack. Each item may either be included or excluded from the selection, making this a combinatorial optimization problem. The knapsack has a maximum weight capacity of 5 units.
+
+\addImageWithSize{0.7}{Sample Given}{contents/algorithms/knapsack/img/Sample_Given.png}
+
+\begin{enumerate}[label=\textbf{Step \arabic*:}]
+    \item \textbf{Generate All Possible Subsets} \\
+        With three items, there are 23 = 8 possible subsets, representing all combinations of inclusion or exclusion for each item.
+
+\addImageWithSize{0.7}{Possible Subsets}{contents/algorithms/knapsack/img/Possible_Subsets.png}
+
+    \item \textbf{Evaluate Each Subset} \\
+        For each subset, we compute the total weight and total value. If the total weight does not exceed the knapsack capacity, the subset is considered valid.
+
+\addImageWithSize{0.7}{Evaluation}{contents/algorithms/knapsack/img/Evaluation.png}
+
+    \item \textbf{Identify the Optimal Subset} \\
+        Among the valid subsets, we select the one with the highest total value. In this case, the subset including \textbf{Item A and Item B} yields the maximum value of 7 without exceeding the weight limit.
+\end{enumerate}
+
+\addImageWithSize{0.7}{Optimal Subsets}{contents/algorithms/knapsack/img/Optimal_Subset.png}
+
+Using the brute force approach, we examined every possible combination of items and evaluated each against the weight constraint. The optimal solution for this instance is to include \textbf{Item A and Item B}, resulting in a total value of 7 within the knapsack's capacity.
+

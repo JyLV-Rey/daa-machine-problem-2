@@ -95,7 +95,8 @@
 
 \end{titlepage}
 
-
+\tableofcontents
+\pagebreak
 \section{Introduction}
 \input{contents/introduction/introduction}
 
@@ -110,15 +111,20 @@
 \input{contents/algorithms/bubble_sort/simulation}
 \input{contents/algorithms/bubble_sort/analysis}
 
+%
+\include{contents/algorithms/knapsack/description.tex}
+\include{contents/algorithms/knapsack/simulation.tex}
+\include{contents/algorithms/knapsack/analysis.tex}
+
 % TRAVELLING SALESMAN PROBLEM
 \include{contents/algorithms/traveling_salesman/description.tex}
 \include{contents/algorithms/traveling_salesman/simulation.tex}
 \include{contents/algorithms/traveling_salesman/analysis.tex}
 
 \section{Optimization Techniques}
-
 \input{contents/optimized_algorithms/selection_sort/description}
 \include{contents/optimized_algorithms/traveling_salesman/description}
+\include{contents/optimized_algorithms/knapsack/description}
 
 \end{document}
 

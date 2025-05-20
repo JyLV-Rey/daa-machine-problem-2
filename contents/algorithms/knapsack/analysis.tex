@@ -1,0 +1,42 @@
+\subsection{Analysis of Time Complexity}
+
+\subsubsection{Knapsack Problem}
+
+\addImageWithSize{0.7}{Time Complexity Analysis}{contents/algorithms/knapsack/img/Time_Complexity_Analysis.png}
+
+Manually analyzing the time complexity per line in the brute force solution is feasible, but we will take a structured approach to determine the total runtime complexity.
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Subset Generation} \\
+    Let $n$ be the number of items. Each item can either be included or excluded from a subset, resulting in:
+    \[
+        \text{Number of subsets} = 2^n
+    \]
+    This is directly implemented in the code using:
+    \[
+        \texttt{for i in range(2\^{}n):}
+    \]
+    This loop enumerates all possible combinations (or subsets) of the $n$ items.
+
+    \item \textbf{Subset Evaluation} \\
+    For each subset, the algorithm calculates the total weight and total value. This is done using another loop:
+    \[
+        \texttt{for j in range(n):}
+    \]
+    This loop checks if each item is part of the current subset using bitwise operations. In the worst case, it examines all $n$ items per subset. So, the work done per subset is:
+    \[
+        T_1 = O(n)
+    \]
+
+    \item \textbf{Total Time Complexity} \\
+    The total time complexity is the product of the number of subsets and the work done per subset:
+    \[
+        T(n) = O(2^n \cdot n)
+    \]
+    Picking the most significant term, we simplify this to:
+    \[
+        \boxed{O(n \cdot 2^n)}
+    \]
+\end{enumerate}
+
+This exponential time complexity is expected, as the brute force approach exhaustively evaluates every possible subset to identify the one that yields the maximum value without exceeding the capacity. This makes it inefficient for large $n$, but accurate for small datasets.

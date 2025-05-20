@@ -1,7 +1,6 @@
-\subsection{Analysis}
+\subsubsection{Analysis}
 
 % DESCRIPTION
-\subsubsection{Worst-Case Time Complexity Analysis of Selection Sort}
 The worst-case of \textbf{Selection Sort} occurs regardless of the initial order of the elements (whether reversed, sorted, or random order), since the algorithm performs the same number of comparisons in every case.
 
 In Selection Sort, during each pass, the smallest (or largest) element from the unsorted part of the array is selected and swapped with the element at the current position.
@@ -17,7 +16,7 @@ In Selection Sort, during each pass, the smallest (or largest) element from the 
 \textbf{Calculating the total number of comparisons required to sort the array:}
 \begin{center}
     \begin{align*}
-        &= (n - 1) + (n - 2) + (n - 3) + \dots + 2 + 1 \\
+        &= (n - 1) + (n - 2) + (n - 3) + \cdots + 2 + 1 \\
         &= \frac{(n - 1)(n - 1 + 1)}{2} \\
         &= \frac{n(n - 1)}{2} \\
         &= \frac{n^2 - n}{2} \\

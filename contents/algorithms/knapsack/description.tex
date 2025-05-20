@@ -1,0 +1,40 @@
+\subsection{Knapsack Problem}
+
+% DESCRIPTION
+\subsubsection{Description}
+
+The knapsack problem is a decision-based optimization task where a set of items, each with a specific weight and value, must be selected to fit into a knapsack with a limited weight capacity. The objective is to find the combination of items that produces the highest total value without the total weight exceeding the limit. Each item can only be fully taken or not taken at all, meaning there are only two choices for every item: include it or exclude it.
+
+Using the brute force approach, the problem is solved by generating and evaluating all possible combinations of items. This means listing every subset of items and checking which ones fit within the weight limit. For each valid subset, the total value is calculated, and the combination that gives the highest value is selected as the solution. While this method guarantees finding the optimal result, it becomes highly inefficient as the number of items increases, since the number of possible combinations doubles with each additional item.
+
+The brute force method is helpful for small instances of the problem, as it is straightforward and easy to understand. However, due to its exponential time complexity, it is rarely practical for larger datasets, and more efficient methods are often used in those cases.
+
+% PSEUDOCODE
+\subsubsection{Pseudocode}
+
+\begin{algorithm} [H]
+    \caption{Brute Force Knapsack}
+    \begin{algorithmic}
+    \State{} \textbf{Input:} Weights $\text{weight}[1 \ldots n]$, values $\text{value}[1 \ldots n]$, capacity $W$
+    \State{} \textbf{Output:} Maximum value achievable without exceeding weight $W$
+    \State{}
+    
+    \State{} $\text{maxValue} \gets 0$
+    \State{} $n \gets$ number of items
+    \ForAll{subset $S$ of $\{1, 2, \ldots, n\}$}
+        \State{} $\text{totalWeight} \gets 0$
+        \State{} $\text{totalValue} \gets 0$
+        \ForAll{$i \in S$}
+            \State{} $\text{totalWeight} \gets \text{totalWeight} + \text{weight}[i]$
+            \State{} $\text{totalValue} \gets \text{totalValue} + \text{value}[i]$
+        \EndFor{}
+        \If{$\text{totalWeight} \leq W$ \textbf{and} $\text{totalValue} > \text{maxValue}$}
+            \State{} $\text{maxValue} \gets \text{totalValue}$
+        \EndIf{}
+    \EndFor{}
+    \State{} \Return{} $\text{maxValue}$
+    \end{algorithmic}
+    \end{algorithm}
+    
+
+This algorithm solves the knapsack problem using brute force. It tests every possible combination of items and checks whether each one fits within the weight limit. For each valid combination, it calculates the total value, and if that value is better than any found before, it stores it as the current best. After all combinations are checked, the best value is returned.
