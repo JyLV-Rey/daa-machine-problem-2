@@ -1,0 +1,37 @@
+\subsection{Traditional Bubble Sort vs. Optimized Bubble Sort}
+
+\addImageWithSize{.8}{Traditional Bubble Sort --- 1}{contents/optimized_algorithms/bubble_sort/img/Traditional Bubble Sort - 1.png}
+\addImageWithSize{.8}{Optimized Bubble Sort --- 1}{contents/optimized_algorithms/bubble_sort/img/Optimized Bubble Sort - 1.png}
+\addImageWithSize{.8}{Traditional Bubble Sort --- 2}{contents/optimized_algorithms/bubble_sort/img/Traditional Bubble Sort - 1.png}
+\addImageWithSize{.8}{Optimized Bubble Sort --- 2}{contents/optimized_algorithms/bubble_sort/img/Optimized Bubble Sort - 2.png}
+
+Above are the sample results from the implementation of the algorithms. The table below summarizes the performance of the traditional versus the optimized Bubble Sort across two data sets. Both implementations were tested using the same unsorted inputs to ensure a fair comparison.
+
+\begin{table}[h]
+    \centering
+    \caption{Comparison of Traditional and Optimized Bubble Sort Implementations}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Implementation} & \textbf{Data Set} & \textbf{Total Passes} & \textbf{Total Array Accesses} \\
+        \hline
+        Traditional & Data Set 1 & 19 & 580 \\
+        Optimized   & Data Set 1 & 13 & 694 \\
+        \hline
+        Traditional & Data Set 2 & 20 & 556 \\
+        Optimized   & Data Set 2 & 8  & 484 \\
+        \hline
+    \end{tabular}
+    \label{tab:sort_comparison}
+\end{table}
+
+In Data Set 1, the optimized Bubble Sort algorithm achieved a noticeable reduction in the number of passes—from 19 down to 13—demonstrating improved loop efficiency. However, this came with a trade-off: the total array accesses increased to 694 from the original 580. This increase is primarily due to the inclusion of extra conditional checks (e.g., early exit detection) and potential best-case tracking mechanisms, which improve sorting speed but may result in more memory accesses.
+
+Despite this rise in array accesses, the reduction in total passes is a crucial metric for time complexity, especially when the dataset is nearly sorted. Fewer passes directly contribute to a shorter runtime in real-world applications where loop iterations are costly.\\
+
+In Data Set 2, the optimized algorithm outperformed the traditional implementation in both metrics. The number of passes was reduced dramatically from 20 to 8, while the total array accesses also decreased from 556 to 484. This clearly illustrates the effectiveness of the optimization, especially in scenarios where the data may already be partially sorted or where early termination conditions can be utilized effectively.
+
+Overall, the results indicate that the \textbf{optimized Bubble Sort implementation can yield significant performance gains in terms of the number of passes required to sort the data}. Although there may be instances of increased array accesses, this is often offset by gains in efficiency, making the algorithm better suited for practical use where time complexity matters more than raw memory access counts.
+
+
+
+
