@@ -1,0 +1,12 @@
+Introduction to knapsack problem, its types and how to solve them. (2024, October 1). GeeksforGeeks. https://www.geeksforgeeks.org/introduction-to-knapsack-problem-its-types-and-how-to-solve-them/ 
+
+Yadav, P. (2023, April 25). Understanding the knapsack Problem: A guide for beginners. Medium. https://medium.com/@prekshayadav0819/understanding-the-knapsack-problem-a-guide-for-beginners-d0146a59e9 
+
+DSA The 0/1 knapsack problem. (n.d.). W3Schools. https://www.w3schools.com/dsa/dsa_ref_knapsack.php 
+
+Ram, N. (2023, June 17). Optimizing e-Commerce: Solving the Bin Packing Problem. AAXIS.
+https://www.aaxisdigital.com/insights-blog/optimizing-ecommerce-solving-the-bin-packing-problem?utm_source=chatgpt.com
+
+Mishra, V. (2024, January 21). All about the 0/1 Knapsack Problem Algorithm - Vishwamitra Mishra - Medium. Medium. https://vmlogger.medium.com/all-about-0-1-knapsack-problem-solving-algorithm-96b19be291e6
+
+Armas, L. F. P., PhD. (2024, November 21). To Drop-It or to Keep-It? How to Solve a Video Game Inventory Problem with Mathematical Optimization. Medium. https://ai.gopubby.com/to-drop-it-or-to-keep-it-126af0f7ece1
