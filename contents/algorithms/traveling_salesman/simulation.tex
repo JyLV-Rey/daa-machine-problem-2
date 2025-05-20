@@ -1,0 +1,133 @@
+\pagebreak
+\subsubsection{Simulation}
+
+Suppose we have a graph $G$ of 4 nodes $(a,b,c,d)$, with relationships represented by $G[i][j]$ represented by a two-dimensional matrix.
+
+\[
+\begin{array}{c|cccc}
+  & A & B & C & D \\
+\hline
+A & 0 & 3 & 0 & 7 \\
+B & 3 & 0 & 2 & 0 \\
+C & 0 & 2 & 0 & 4 \\
+D & 7 & 0 & 4 & 0 \\
+\end{array}
+\]
+
+This matrix means:
+\begin{itemize}
+    \item G[A][B] has a weight of 3
+    \item G[A][D] has a weight of 7
+    \item G[B][C] has a weight of 2
+    \item G[C][D] has a weight of 4
+\end{itemize}
+
+
+\paragraph{Step 1: Initialization}
+
+\begin{itemize}
+    \item Number of nodes: $N = 4$
+    \item Starting node: $n = A$
+    \item Nodes to permute: $cities = \{B, C, D\}$
+    \item Total permutations of $cities$: $3! = 6$
+\end{itemize}
+
+\paragraph{Step 2: List all permutations of $cities$}
+
+\[
+\begin{aligned}
+P_1 &= (B, C, D) \\
+P_2 &= (B, D, C) \\
+P_3 &= (C, B, D) \\
+P_4 &= (C, D, B) \\
+P_5 &= (D, B, C) \\
+P_6 &= (D, C, B)
+\end{aligned}
+\]
+
+\paragraph{Step 3: Evaluate each candidate cycle $C = (A, P_i)$ and calculate total weight}
+
+\begin{itemize}
+
+\item \textbf{Permutation 1:} $C = (A, B, C, D)$  
+Edges and weights:
+\[
+\begin{cases}
+A \to B: 3 \\
+B \to C: 2 \\
+C \to D: 4 \\
+D \to A: 7
+\end{cases}
+\quad \Rightarrow \quad
+\text{Total weight} = 3 + 2 + 4 + 7 = 16
+\]
+Valid cycle: $\checkmark$
+
+\vspace{0.5em}
+
+\item \textbf{Permutation 2:} $C = (A, B, D, C)$  
+Check edges:
+\[
+B \to D: G[B][D] = 0 \quad \Rightarrow \quad \text{No edge, invalid cycle}
+\]
+Valid cycle: $\times$
+
+\vspace{0.5em}
+
+\item \textbf{Permutation 3:} $C = (A, C, B, D)$  
+Check edges:
+\[
+A \to C: G[A][C] = 0 \quad \Rightarrow \quad \text{No edge, invalid cycle}
+\]
+Valid cycle: $\times$
+
+\vspace{0.5em}
+
+\item \textbf{Permutation 4:} $C = (A, C, D, B)$  
+Check edges:
+\[
+A \to C: 0 \quad \Rightarrow \quad \text{No edge, invalid cycle}
+\]
+Valid cycle: $\times$
+
+\vspace{0.5em}
+
+\item \textbf{Permutation 5:} $C = (A, D, B, C)$  
+Check edges:
+\[
+D \to B: 0 \quad \Rightarrow \quad \text{No edge, invalid cycle}
+\]
+Valid cycle: $\times$
+
+\vspace{0.5em}
+
+\item \textbf{Permutation 6:} $C = (A, D, C, B)$  
+Edges and weights:
+\[
+\begin{cases}
+A \to D: 7 \\
+D \to C: 4 \\
+C \to B: 2 \\
+B \to A: 3
+\end{cases}
+\quad \Rightarrow \quad
+\text{Total weight} = 7 + 4 + 2 + 3 = 16
+\]
+Valid cycle: $\checkmark$
+
+\end{itemize}
+
+\paragraph{Step 4: Conclusion}
+
+The valid Hamiltonian cycles with minimal total weight are:
+
+\[
+\boxed{
+\begin{cases}
+C^{*}_1 = (A, B, C, D, A), & \text{Total weight} = 16 \\
+C^{*}_2 = (A, D, C, B, A), & \text{Total weight} = 16
+\end{cases}
+}
+\]
+
+These represent the minimal Hamiltonian cycles for the graph starting and ending at node $A$.
