@@ -1,0 +1,58 @@
+\subsection{Analysis}
+
+% DESCRIPTION
+\subsubsection{Description}
+The worst case of the Optimized Linear Search occurs when the element to be found is either not found in the list or is positioned exactly in the middle, causing the algorithm to exhaust all passes from both ends.
+
+Let $n$ be the total number of elements in the array.  
+In each pass, two elements are compared—one from the left and one from the right—until the two pointers meet or cross.
+
+\begin{itemize}
+	\item Pass 1: Compares elements at index $0$ and index $(n - 1)$
+	\item Pass 2: Compares elements at index $1$ and index $(n - 2)$
+	\item Pass 3: Compares elements at index $2$ and index $(n - 3)$ \\
+.\\
+.\\
+.
+	\item Pass $n/2$: Compares the middle element if $n$ is odd (only one comparison in this case)
+\end{itemize}
+
+% PSEUDOCODE
+\subsubsection{Pseudocode}
+\textbf{Total number of passes (worst case)}: $n/2$  
+Each pass compares up to 2 elements, except possibly the middle pass if $n$ is odd, which compares only 1 element.
+
+\subsection*{Calculating Total Comparisons in the Worst Case}
+
+\textbf{For even $n$:}
+\[
+\text{Total comparisons} = 2 \times \left(\frac{n}{2}\right) = n
+\]
+
+\textbf{For odd $n$:}
+\[
+\text{Total comparisons} = 2 \times \left(\frac{n}{2}\right) + 1 = n
+\]
+
+Thus, in all cases, the total number of comparisons in the worst case is $n$.
+
+\subsection*{Time Complexity}
+
+While the total number of passes is roughly half compared to a traditional linear search (which would require $n$ passes, one element at a time), the total number of element comparisons remains proportional to $n$.
+
+Therefore, the worst-case time complexity is:
+\[
+\mathcal{O}(n)
+\]
+
+\subsection*{Practical Efficiency Gains}
+
+Despite the theoretical complexity remaining linear, the algorithm achieves better practical runtime performance due to:
+
+\begin{itemize}
+	\item \textbf{Bidirectional scanning} — effectively checking two elements per pass
+	\item \textbf{Digit-based filtering} — using modulo operation to skip unnecessary comparisons
+\end{itemize}
+
+These improvements reduce actual runtime in many real-world scenarios, making this optimized linear search more efficient than the traditional approach.
+

@@ -7,28 +7,33 @@ def brute_force_knapsack(weights, values, capacity):
     best_items = []
     all_subsets = []
 
+    comparisons = 0
+    array_accesses = 0
+
     # Try all combinations
     for i in range(total_subsets):
         temp_items = []
         total_weight = 0
         total_value = 0
 
-        # Check if each item is included
         for j in range(n):
-            if (i >> j) & 1:  # Check bit j
+            if (i >> j) & 1:
                 temp_items.append(j)
                 total_weight += weights[j]
                 total_value += values[j]
+                array_accesses += 2  # weights[j], values[j]
 
-        # Save details of the subset
         valid = total_weight <= capacity
+        comparisons += 1  # for this validity check
         all_subsets.append([temp_items, total_weight, total_value, valid])
 
+        comparisons += 1  # for total_value > max_value
         if valid and total_value > max_value:
             max_value = total_value
             best_items = temp_items
 
-    return max_value, best_items, all_subsets
+    return max_value, best_items, all_subsets, comparisons, array_accesses
+
 
 def main():
     capacity = int(input("Max weight capacity: "))
@@ -45,12 +50,14 @@ def main():
         weights.append(w)
         values.append(v)
 
-    max_value, best_items, all_subsets = brute_force_knapsack(weights, values, capacity)
+    max_value, best_items, all_subsets, comparisons, array_accesses = brute_force_knapsack(weights, values, capacity)
 
     print("\n>>> Best Combination <<<")
     print("Items to include:", [i+1 for i in best_items])
     print("Total weight:", sum(weights[i] for i in best_items))
     print("Total value:", max_value)
+    print("Total comparisons:", comparisons)
+    print("Total array accesses:", array_accesses)
 
     print("\n>>> All Subsets <<<")
     for i, subset in enumerate(all_subsets):
@@ -60,6 +67,7 @@ def main():
             print("- Valid")
         else:
             print("- Invalid (too heavy)")
+
 
 if __name__ == "__main__":
     main()

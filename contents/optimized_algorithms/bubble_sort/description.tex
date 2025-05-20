@@ -1,35 +1,54 @@
-\subsection{Bubble Sort}
+\subsection{ Bubble Sort }
+
+% DESCRIPTION
 \subsubsection{Description}
 
-%% DESCRIPTION
-Bubble Sort is a comparison-based sorting algorithm that repeatedly compares adjacent elements and swaps them if they are out of order, moving one element at a time, until the list is sorted. It iterates through the array multiple times, allowing smaller elements to “bubble” to the beginning of the list, while larger elements sink to the end of the list with each pass.
+The optimization above features \textbf{bidirectional pass} and \textbf{dynamic boundary shrinking}. In this design, the algorithm alternates between a forward pass—moving the largest unsorted element to the end—and a backward pass—pushing the smallest element to the start. This dual-direction traversal allows the sorting to proceed simultaneously from both ends of the array, effectively halving the number of required iterations in many practical cases.
 
-Bubble Sort is considered as the simplest sorting algorithm, characterized by a straightforward and easy-to-understand algorithm. However, it is inefficient in large lists, having a time complexity that grows quadratically as the size of the input increases.
-
-When sorting the elements in ascending order, Bubble Sort begins from the first index, comparing the first and second elements. If the first element is greater than the second element, they are swapped. This process goes on until a pass with no exchanges is made.
+Moreover, the optimization uses \texttt{lastSwapped} variable to record the index at which the most recent swap occurred during each pass. After each forward or backward pass, the boundaries of the unsorted portion (\texttt{start} and \texttt{end}) are updated accordingly. The dynamic boundary shrinking minimizes redundant comparisons by ensuring that already sorted portions of the array are not reprocessed in subsequent iterations.
 
 %% PSEUDOCODE
-\pagebreak
 \subsubsection{Pseudocode}
-Given an array $(Arr)$ of numbers with size $n$, accessing the elements for $Arr(i_0, i_1, i_2,\dots, i_{n-1})$ we can perform the bubble sort algorithm:
+Given an array $(Arr)$ of numbers with size $n$, below is the optimized bubble sort algorithm:
 
 \begin{algorithm} [H]
-    \caption{Bubble Sort (Ascending Order)}
+    \caption{Optimized Bubble Sort (Ascending Order)}
     \begin{algorithmic}
-    \State $n \gets \text{length}(Arr)$
-    \For{$i \gets 0$ \textbf{to} $n - 1$}
-        \For{$j \gets 0$ \textbf{to} $n - i - 2$}
-            \If{$Arr[j] > Arr[j+1]$}
-                \State swap $Arr[j]$ and $Arr[j+1]$
-            \EndIf
-        \EndFor
-    \EndFor
+    \Procedure{OptimizedBubbleSort}{$Arr$}
+        \State{} $start \gets 0$ \Comment{Start index for unsorted portion}
+        \State{} $end \gets \text{length}(Arr) - 1$ \Comment{End index for unsorted portion}
+        \While{$start < end$}
+            \State{} $lastSwapped \gets 0$
+            \Comment{Forward pass: move largest element to the right}
+            \For{$i \gets start$ \textbf{to} $end - 1$}
+                \If{$Arr[i] > Arr[i + 1]$}
+                    \State{} swap $Arr[i]$ and $Arr[i + 1]$
+                    \State{} $lastSwapped \gets i$
+                \EndIf{}
+            \EndFor{}
+            \State{} $end \gets lastSwapped$
+            \If{$start \geq end$}
+                \State{} \textbf{break} \Comment{Early exit: array is sorted}
+            \EndIf{}
+            \State{} $lastSwapped \gets 0$
+            \Comment{Backward pass: move smallest element to the left}
+                \For{$i \gets end - 1$ \textbf{downto} $start$}
+                    \If{$Arr[i] > Arr[i + 1]$}
+                        \State{} swap $Arr[i]$ and $Arr[i + 1]$
+                        \State{} $lastSwapped \gets i + 1$
+                    \EndIf{}
+                \EndFor{}
+            \State{} $start \gets lastSwapped$
+        \EndWhile{}
+    \EndProcedure{}
 \end{algorithmic}
 \end{algorithm}
 
 %% PSEUDOCODE DESCRIPTION
-Inside the function, the algorithm employs two nested for loops to traverse the list multiple times. The outer loop is responsible for controlling the number of passes made over the array. For a list of n elements, Bubble Sort requires n-1 passes to ensure that all elements are sorted in the correct order. Each pass moves the next largest unsorted element to its correct position at the end of the array.
 
-Nested within the outer loop is the inner loop, which handles the comparison of adjacent elements. During each iteration of the inner loop, the algorithm compares each pair of adjacent values. The range of the inner loop decreases with every outer loop iteration, as the largest values are already sorted and pushed to the end of the list.
+Another enhancement is the inclusion of an \textbf{early termination condition} that checks whether \texttt{start} is greater than or equal to \texttt{end} (\texttt{start}~$\geq$~\texttt{end}) after a pass. If this condition is met, it implies that all elements are in sorted order, allowing the algorithm to terminate immediately. 
 
-The defining logic lies in the if statement inside the inner loop, which is a conditional check whether the current element is greater than the element that follows it. If this condition is true, a swap operation is performed to place the smaller element before the larger one. This swap is usually implemented with a temporary variable to ensure that no data is lost during the exchange.
+In contrast, the traditional bubble sort algorithm lacks both of these optimizations. It neither tracks swap positions nor adjusts the sorting bounds dynamically. As a result, it continues to iterate through the full unsorted portion even if no swaps occur, leading to poor performance on sorted or nearly sorted arrays. All passes are fixed in length and direction, contributing to its inefficiency in practical use.
+
+Although both versions share the same asymptotic worst-case time complexity of \(O(n^2)\), the optimized bubble sort significantly outperforms the traditional approach in real-world scenarios. It reduces the total number of comparisons, limits swap operations, and speeds up convergence on partially sorted datasets.
+

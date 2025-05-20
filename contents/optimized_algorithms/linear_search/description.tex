@@ -1,0 +1,51 @@
+\subsection{Optimized Linear Search}
+
+% DESCRIPTION
+\subsubsection{Description}
+
+This optimized Linear Search algorithm implements a bidirectional search that aims to improve practical runtime efficiency. Instead of scanning the array in one direction, it compares elements both from left and right ends simultaneously in each iteration. 
+
+By this, it can possibly locate the target value in half the time, especially when the value is located near the boundaries of the list. In addition, to further optimize the algorithm,  a modulo condition is applied before performing a full comparison. This happens by checking whether the last digit of the current element matches the last digit of the target value using the expression $value \% 10$. 
+
+If the condition is not met, the element is skipped, reducing unnecessary comparisons. In addition, the search terminates immediately once a match is found, ensuring early exit in favorable cases. Although the worst case time complexity stays the same %, this optimized version offers improved runtime performance in many practical scenarios due to its dual direction scanning and digit based filtering.
+
+% PSEUDOCODE
+\subsubsection{Pseudocode}
+\begin{algorithm}[H]
+	\caption{Optimized Linear Search}
+	\begin{algorithmic}
+	\Procedure{OptimizedLinearSearch}{numbers, value}
+		\State{} pass\_count $\gets$ 0
+		\State{} left $\gets$ 0
+		\State{} right $\gets$ length (numbers) $-$ 1
+		
+		\While{left $\leq$ right}
+			\State{} pass\_count $\gets$ pass\_count + 1
+			
+			\If{value mod 10 = numbers[left] mod 10}
+				\If{value = numbers[left]}
+					\State{} \textbf{print} value, passes
+					\State{} \Return{} true
+				\EndIf{}
+			\EndIf{}
+			
+			\If{left $\neq$ right}
+				\If{value mod 10 = numbers[right] mod 10}
+					\If{value = numbers[right]}
+						\State{} \textbf{print} value, passes
+						\State{} \Return{} true
+					\EndIf{}
+				\EndIf{}
+			\EndIf{}
+			
+			\State{} left $\gets$ left + 1
+			\State{} right $\gets$ right $-$ 1
+		\EndWhile{}
+		
+		\State{} \textbf{print} passes
+		\State{} \Return{} false
+	\EndProcedure{}
+	\end{algorithmic}
+	\end{algorithm}
+	
+

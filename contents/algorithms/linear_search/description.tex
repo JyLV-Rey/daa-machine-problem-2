@@ -1,0 +1,38 @@
+\subsection{Linear Search}
+\subsubsection{Description}
+
+%% DESCRIPTION
+Sequential Search, also called as Linear Search is the simplest searching algorithm used to locate a specific element within a data set. When performing a search, Linear Search begins at the start of the list, compares each element with the target value, and proceeds to the next item if no match is found. If the end of the list is reached without locating the target, the algorithm terminates and returns a result indicating that the element is not present.
+
+Linear Search is classified as a brute-force approach due to its exhaustive method of checking each individual element without using any optimization or pre-sorting of the data. It does not rely on any assumptions about the order or structure of the elements, making it applicable to both sorted and unsorted lists.
+
+This algorithm is valued for its simplicity and ease of implementation, especially for small data sets or situations where searches are infrequent. However, it is inefficient for larger data collections, as it may require scanning the entire list in the worst-case scenario, resulting in a linear time complexity of $O(n)$, where n is the number of elements.
+
+%% PSEUDOCODE
+\pagebreak
+\subsubsection{Pseudocode}
+Given an array $(Arr)$ of numbers with size $n$, accessing the elements as $Arr(i_0, i_1, i_2,\dots, i_{n-1})$, we can perform the Sequential Search algorithm:
+
+\begin{algorithm} [H]
+    \caption{Sequential Search}
+    \begin{algorithmic}
+    \State{} $n \gets \text{length}(Arr)$
+    \State{} $passes \gets 0$
+    \For{$i \gets 0$ \textbf{to} $n - 1$}
+        \State{} $passes \gets passes + 1$
+        \If{$Arr[i] = key$}
+            \State{} \Return{} $(i, passes)$
+        \EndIf{}
+    \EndFor{}
+    \State{} \Return{} $(-1, passes)$
+    \end{algorithmic}
+\end{algorithm}
+
+%% PSEUDOCODE DESCRIPTION
+Inside the function, the algorithm begins by initializing a counter for the number of passes. The main component is a single loop that traverses the array from the first element to the last.
+
+During each iteration of the loop, the current element in the array is compared with the target search value, called the key. If a match is found, the index at which the key is located is immediately returned along with the number of passes made.
+
+If the loop finishes without locating the target value, it means the key does not exist in the array. In this case, the function returns -1 to indicate that the element was not found, along with the total number of passes made.
+
+Sequential Search is straightforward and does not require the array to be sorted. However, it is considered inefficient for large data sets due to its linear time complexity in the worst case. It is primarily used when the data set is small or unsorted, and a simple search solution is sufficient.

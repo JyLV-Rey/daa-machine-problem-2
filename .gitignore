@@ -1,0 +1,27 @@
+# Ignore everything
+*
+
+# Add gitignore
+!.gitignore
+
+# Allow folders so allowed files inside them aren't ignored
+!*/
+
+# Allow .tex files
+!*.tex
+
+# Allow Python files
+!*.py
+
+# Allow Jupyter notebooks
+!*.ipynb
+
+# Allow image files
+!*.png
+!*.jpg
+!*.jpeg
+!*.gif
+!*.svg
+!*.bmp
+!*.tiff
+!*.webp

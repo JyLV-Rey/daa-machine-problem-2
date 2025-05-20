@@ -1,0 +1,24 @@
+\subsubsection{Analysis}
+
+Sequential Search, also known as Linear Search, is the most basic search algorithm. It works by checking each element of the array one by one from the beginning until the target element is found or the end of the array is reached.
+
+In the worst-case scenario, the element is either not present or located at the last index of the array. This forces the algorithm to traverse the entire array, making a maximum of \(n\) comparisons, where \(n\) is the number of elements.
+
+\begin{itemize}
+    \item Pass 1: Compare key with arr[0]
+    \item Pass 2: Compare key with arr[1]
+    \item Pass 3: Compare key with arr[2]
+    \item[] \(\vdots\)
+    \item Pass \(n\): Compare key with arr[n-1]
+\end{itemize}
+
+Calculating the total number of comparisons in the worst case:
+\begin{center}
+    \begin{align*}
+        &= 1 + 1 + 1 + \cdots + 1\ (\text{repeated \(n\) times}) \\
+        &= n \\
+        &= \textbf{\(O(n)\)}
+    \end{align*}
+\end{center}
+
+Therefore, the worst-case time complexity is \(\mathbf{O(n)}\), as the algorithm performs a linear number of comparisons relative to the input size.
