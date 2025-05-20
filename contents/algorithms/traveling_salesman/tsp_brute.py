@@ -59,17 +59,8 @@ def brute_tsp(cities, distance_matrix, constraints):
 def main():
     print("=== Traveling Salesman Problem Solver (Brute Force) ===")
 
-    # Manually define cities and matrix
-    cities = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-    distance_matrix = [
-        [0,  6,  0, 15,  3,  9, 12],  # a
-        [6,  0,  5,  0,  0, 10,  0],  # b
-        [0,  5,  0,  7,  0,  0,  0],  # c
-        [15, 0,  7,  0,  0,  0,  9],  # d
-        [3,  0,  0,  0,  0,  4,  0],  # e
-        [9, 10, 0,  0,  4,  0,  2],  # f
-        [12, 0,  0,  9,  0,  2,  0]   # g
-    ]
+    # Get city information
+    cities, distance_matrix = get_city_info()
 
     # Get constraints
     constraints = get_constraints(cities)
