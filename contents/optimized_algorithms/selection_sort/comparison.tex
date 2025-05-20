@@ -1,0 +1,31 @@
+\subsubsection{Comparison}
+
+\addImageWithSize{.8}{Traditional Selection Sort - 1}{contents/optimized_algorithms/selection_sort/img/Traditional1}
+\addImageWithSize{.8}{Optimized Selection Sort - 1}{contents/optimized_algorithms/selection_sort/img/Optimized1}
+\addImageWithSize{.8}{Traditional Selection Sort - 2}{contents/optimized_algorithms/selection_sort/img/Traditional2}
+\addImageWithSize{.8}{Optimized Selection Sort - 2}{contents/optimized_algorithms/selection_sort/img/Optimized2}
+
+The above are the sample results from the implementation of the algorithms. The table below summarizes the performance of the traditional versus optimized Selection Sort across two data sets. Both versions were tested using the same unsorted inputs to ensure a fair and consistent comparison.
+
+\begin{table}[h]
+    \centering
+    \caption{Comparison of Traditional and Optimized Selection Sort Implementations}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Implementation} & \textbf{Data Set} & \textbf{Total Passes} & \textbf{Total Array Accesses} \\
+        \hline
+        Traditional & Data Set 1 & 19 & 492 \\
+        Optimized   & Data Set 1 & 10 & 456 \\
+        \hline
+        Traditional & Data Set 2 & 20 & 523 \\
+        Optimized   & Data Set 2 & 10  & 496 \\
+        \hline
+    \end{tabular}
+    \label{tab:sort_comparison}
+\end{table}
+
+In Data Set 1, the optimized Selection Sort reduced the number of passes from 19 to 10, showing better loop efficiency. It also reduced the total accesses to the array from 492 to 456, which means that fewer comparisons and swaps were made. This makes the sorting process more efficient in terms of both time and memory use.
+
+In Data Set 2, the optimized version performed again better. Passes dropped from 20 to 10, and array accesses decreased from 523 to 496. The consistent improvement across both data sets shows that the optimization works well, especially for partially sorted data.
+
+Overall, the optimized Selection Sort is more efficient than the traditional version. Reduce both the number of passes and the number of accesses in the array, making it a better choice for improving the sorting performance.

@@ -1,0 +1,6 @@
+Geeksforgeeks (2023). A sorting algorithm that slightly improves on selection sort. https://www.geeksforgeeks.org/sorting-algorithm-slightly-improves-selection-sort/
+
+GeeksforGeeks. (n.d.). Selection Sort. https://www.geeksforgeeks.org/selection-sort/
+
+Khan Academy. (n.d.). https://www.khanacademy.org/computing/computer-science/algorithms/sorting-algorithms/a/sorting
+

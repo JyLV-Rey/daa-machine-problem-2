@@ -32,6 +32,7 @@ def traditional_bubbleSort(arr):
     print(f"\nTotal passes: {pass_count}")
     print(f"Total array accesses: {array_accesses}")
     print(f"Total swaps performed: {swaps}")
+    print(f"Sorted array: {arr}")
 
 user_input = input("Enter numbers separated by spaces: ")
 try:

@@ -1,13 +1,7 @@
 # User input 
-print("Enter the length of the array: ", end = "")
-arrayLength = int(input()) # Read the length of the array
-array = []
-
-# Prompt the user to enter the array length
-print("Enter element: ")
-for x in range(arrayLength):
-    print(">> ", end = "")
-    array.append(int(input()))
+array_input = input("Enter array elements separated by commas: ")
+array = [int(x.strip()) for x in array_input.split(",")]
+arrayLength = len(array)
 
 # Display the array before sorting
 print("Array: ", end = "")
@@ -24,25 +18,25 @@ total_swaps = 0
 for x in range(arrayLength - 1):
     total_passes += 1
     minIndex = x
-    # Access for initial minIndex element
     total_array_accesses += 1  # reading array[minIndex]
 
     for j in range(x + 1, arrayLength):
-        # Each comparison reads two elements
         total_array_accesses += 2  # array[j], array[minIndex]
         if array[j] < array[minIndex]:
             minIndex = j
-            # Access for new minIndex element
             total_array_accesses += 1  # reading array[minIndex]
 
     # Swap the current element with the smallest found
     if minIndex != x:
-        # 4 accesses: two reads + two writes
-        total_array_accesses += 4
-        temp = array[x]
-        array[x] = array[minIndex]
-        array[minIndex] = temp
+        total_array_accesses += 4  # two reads + two writes
+        array[x], array[minIndex] = array[minIndex], array[x]
         total_swaps += 1
+
+    # Show array after each pass
+    print(f"After Pass {total_passes}: ", end="")
+    for val in array:
+        print(val, end=" ")
+    print()
 
 # Display the sorted array
 print("Sorted Array: ", end = "")

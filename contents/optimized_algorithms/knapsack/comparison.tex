@@ -1,0 +1,24 @@
+\subsubsection{Comparison}
+
+\addImageWithSize{.8}{Knapsack Output Using Brute Force}{contents/optimized_algorithms/knapsack/img/output brute force.png}
+\addImageWithSize{.8}{All Subsets Using Brute Force}{contents/optimized_algorithms/knapsack/img/all subsets brute force.png}
+\addImageWithSize{.8}{Knapsack Output Using Branch and Bound}{contents/optimized_algorithms/knapsack/img/output branch and bound.png}
+
+Above are the sample results from the implementation of the algorithms. The table below summarizes the performance of the traditional versus the optimized Knapsack algorithm across one data set. Both implementations were tested using the same inputs to ensure a fair comparison.
+
+\begin{table}[h]
+    \centering
+    \caption{Comparison of Traditional and Optimized Bubble Sort Implementations}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Implementation} & \textbf{Data Set} & \textbf{Total Array Accesses} \\
+        \hline
+        Traditional & Data Set 1 & 160\\\hline
+        Optimized   & Data Set 1& 119\\ \hline
+    \end{tabular}
+    \label{tab:sort_comparison}
+\end{table}
+
+The performance comparison between the brute force and branch and bound approaches to solving the knapsack problem reveals a significant difference in efficiency, particularly in terms of array accesses. In the brute force method, the total number of array accesses recorded was 160, whereas the branch and bound algorithm only required 119 array accesses to reach the optimal solution. This difference clearly illustrates the computational advantage of using branch and bound rather than the traditional brute force.
+
+This efficiency makes branch and bound particularly valuable in scenarios where performance and scalability matter, such as logistics, resource allocation, or dynamic systems with many decision variables. While the brute force approach may still be useful for educational purposes or very small datasets, branch and bound is clearly better for practical applications requiring optimized computation.

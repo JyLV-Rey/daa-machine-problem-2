@@ -6,11 +6,12 @@ def OptimizedLinearSearch(numbers, value):
     while left <= right:
         # Counts the number of passes made
         pass_count += 1
+        print(f"PASS {pass_count}: Left = {numbers[left]}, Right = {numbers[right]}")
 
         # Check from the left side of the array
         if value % 10 == numbers[left] % 10:
             if value == numbers[left]:
-                print(f"{value} is found")
+                print(f"\n{value} is found at index {left}")
                 print(f"Passes made: {pass_count}")
                 return True
         
@@ -19,13 +20,13 @@ def OptimizedLinearSearch(numbers, value):
             # Check from the right side of the array
             if value % 10 == numbers[right] % 10:
                 if value == numbers[right]:
-                    print(f"{value} is found")
+                    print(f"\n{value} is found at index {right}")
                     print(f"Passes made: {pass_count}")
                     return True
-
+                
         left += 1
         right -= 1
-    
+
     print(f"Passes made: {pass_count}")
     return False
 
@@ -36,7 +37,17 @@ for i in range(size):
     number = int(input(f"Enter value {i + 1}: "))
     numbers.append(number)
 
-value = int(input("\nEnter number to search: "))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+while True:
+    print("\nArray:", numbers)
+    user_input = input("\nEnter number to search (or type 'exit' to quit): ")
+    
+    if user_input.lower() == "exit":
+        print("Exiting search.")
+        break
+    
+    if not user_input.isdigit():
+        print("Please enter a valid number or type 'exit'.")
+        continue
 
-if not OptimizedLinearSearch(numbers, value):
-    print(f"{value} is not found")
+    value = int(user_input)
+    OptimizedLinearSearch(numbers, value)

@@ -1,0 +1,29 @@
+\subsubsection{Comparison}
+
+\addImageWithSize{.8}{Traditional Linear Search - 1}{contents/optimized_algorithms/linear_search/img/Tradition Linear Search - 1.png}
+\addImageWithSize{.8}{Optimized Linear Search - 1}{contents/optimized_algorithms/linear_search/img/Optimized Linear Search - 1.png}
+\addImageWithSize{.8}{Traditional Linear Search - 2}{contents/optimized_algorithms/linear_search/img/Tradition Linear Search - 2.png}
+\addImageWithSize{.8}{Optimized Linear Search - 2}{contents/optimized_algorithms/linear_search/img/Optimized Linear Search - 1.png}
+
+Above are the sample results from the implementation of the algorithms. The table below summarizes the performance of the traditional versus the optimized Linear Search across two data sets. Both implementations were tested using the same unsorted inputs to ensure a fair comparison.
+
+\begin{table}[h]
+	\centering
+	\caption{Comparison of Traditional and Optimized Linear Search Implementations}
+	\begin{tabular}{c|c|c}
+		\hline
+		\textbf{Implementation} & \textbf{Data Set} & \textbf{Total Passes} \\
+		\hline
+		Traditional & Data Set 1 & 14 \\
+		Optimized   & Data Set 1 & 7 \\
+		\hline
+		Traditional & Data Set 2 & 6 \\
+		Optimized   & Data Set 2 & 6 \\
+	\end{tabular}
+	\label{search_comparison}
+\end{table}
+
+In Data Set 1, the optimized and traditional linear search algorithm, we can observe a significant difference in the number of passes executed to locate the target element. In the optimized linear search, the number 18 was located at index 13 with just 7 passes. This is due to the algorithm performs a bidirectional search, checking elements from each of the left and right boundaries of the array at the same time. Consequently, it practically halves the number of passes in most instances. In contrast, the traditional linear search scanned the array one element at a time from the beginning, requiring 14 passes to reach the same index. This comparison demonstrates the practical efficiency gained by the optimized method. Although both approaches have the same worst-case time complexity of $O(n)$, the optimized version performs fewer comparisons on average due to its parallel scanning strategy. 
+
+In Data Set 2, the optimized linear search  located the element 12 at index 5 in only 6 passes, similar to the traditional linear search. This shows that  that the initial half of the search procedure still operates like the traditional linear search, checking the left-hand elements sequentially but with the added benefit of checking from both ends to promote efficiency. Although in this case the element was located in the initial half of the array, the optimized approach had improved real-world efficiency through eliminating useless checks on the right side due to the digit-based filter. This supports that even when the target is in the first half, the optimized search will still lower runtime by considering two possible matches per pass.
+
