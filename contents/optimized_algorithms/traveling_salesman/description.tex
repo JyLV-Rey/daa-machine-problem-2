@@ -1,3 +1,70 @@
 \subsection{Travelling Salesman}
 \subsubsection{Description}
+To deviate from using a brute force algorithm for the Travelling Salesman Problem we can devise to use a \textbf{Branch \& Bound} approach for the algorithm. The current optimization although maintains its original time complexity of $O(n!)$, the pruning makes up for it providing lesser runtime to the algorithm.
 
+The core logic of this operation comes from the method of pruning, this is a method that stops the current iteration if the current operation is bound to exceed the current minimum cost of the previous known valid path. Below is the listed differences of the features of the new \textbf{Branch \& Bound} algorithm compared with its brute force counterpart.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| l | c | p{8cm} |}
+    \hline
+    \textbf{Feature} & \textbf{Brute Force TSP} & \textbf{Branch and Bound TSP} \\
+    \hline
+    \textbf{Explores All Routes} & Yes & No (prunes suboptimal paths early) \\
+    \hline
+    \textbf{Time Complexity} & $O(n!)$ & Still factorial in worst case, but often faster due to pruning \\
+    \hline
+    \textbf{Memory Use} & Low & Slightly higher (due to recursion and pruning metadata) \\
+    \hline
+    \textbf{Scalability} & Poor & Better due to reduced number of recursive calls \\
+    \hline
+    \textbf{Heuristics/Bounds} & None & Uses upper bound (\texttt{min\_cost}) to prune unpromising paths \\
+    \hline
+    \end{tabular}
+    \caption{Comparison of Brute Force and Branch and Bound Approaches to the TSP}
+\end{table}
+
+While the Big-Oh notation complexity remains the same, it is important to take note that it is the runtime that is given utmost importance in terms of optimization.
+\subsubsection{Pseudocode}
+
+There are not much notable differences between its brute force counterpart, the notable difference to take note of is:
+\[
+if(newCost \geq c*)\text{: }continue;
+\]
+This important condition determines to skip the current iteration if the newer path to be assessed will already exceed the minimum known path, similar implementations can be seen at Djikstra`s algorithm.
+
+It uses the same backtracking algorithm as the brute force algorithm. The pseudocode can be seen in the next page.
+\begin{algorithm}[H]
+    \caption{Branch and Bound TSP}
+    \begin{algorithmic}
+    \Require{} List of cities $C$, Distance matrix $D$, Constraints $cons$
+    \Ensure{} Best route $R^*$ and minimum cost $c^*$
+    
+    \State{} $R^* \gets \text{null}$
+    \State{} $c^* \gets \infty$
+    \State{} $s \gets cons[\texttt{must\_start}]$ if defined else $C[0]$
+    \State{} $U \gets C \setminus \{s\}$
+    
+    \Function{Backtrack}{$route, cost, unvisited$}
+        \If{$unvisited = \emptyset$}
+            \State{} $finalCost \gets cost + D[route[-1]][s]$
+            \State{} $route \gets route \cup \{s\}$
+            \If{$finalCost < c^*$}
+                \State{} $R^* \gets route$
+                \State{} $c^* \gets finalCost$
+            \EndIf{}
+            \State{} \\Return{}
+        \EndIf{}
+        \ForAll{$city \in unvisited$}
+            \State{} $newCost \gets cost + D[route[-1]][city]$
+            \If{$newCost \geq c^*$}
+                \State{} \textbf{continue}
+            \EndIf{}
+            \State{} \Call{Backtrack}{$route \cup \{city\}, newCost, unvisited \setminus \{city\}$}
+        \EndFor{}
+    \EndFunction{}
+    
+    \State{} \Call{Backtrack}{$[s], 0, U$}
+    \State{} \\Return{} $R^*, c^*$
+    \end{algorithmic}
+\end{algorithm}

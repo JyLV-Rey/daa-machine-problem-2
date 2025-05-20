@@ -1,4 +1,5 @@
 % DESCRIPTION
+\subsection{Knapsack}
 \subsubsection{Description}
 
 The 0/1 Knapsack Problem using Branch and Bound is an optimization approach to solving the classic knapsack problem, where the goal is to maximize the total value of items placed in a knapsack without exceeding its weight capacity. Each item can either be included or excluded—hence the ``0/1'' nature of the problem. The Branch and Bound method systematically explores subsets of items using a decision tree, where each node represents a choice to include or exclude an item. It avoids unnecessary computation by pruning branches that cannot yield better results than the current best solution.
@@ -56,4 +57,4 @@ To do this, the algorithm calculates an upper bound at each node, estimating the
         \State{} \Return{} $profitBound$
     \EndFunction{}
     \end{algorithmic}
-    \end{algorithm}
+\end{algorithm}

@@ -1,0 +1,94 @@
+\subsubsection{Comparison}
+
+To further assess the difference of the runtime of the brute force and Branch \& Bound algorithms, the implemented code tracks the routes it assessed alongside the runtime of the program in miliseconds.
+
+The program will assess a two-dimensional array $G$ with 7 nodes:
+
+\[
+\begin{array}{c|ccccccc}
+    & a & b & c & d & e & f & g \\
+\hline
+a & 0 & 6  & 0  & 15 & 3  & 9  & 12  \\
+b & 6  & 0  & 5  & 0  & 0  & 10 & 0  \\
+c & 0  & 5  & 0  & 7  & 0  & 0  & 0  \\
+d & 15 & 0  & 7  & 0  & 0  & 0  & 9  \\
+e & 3  & 0  & 0  & 0  & 0  & 4  & 0  \\
+f & 9  & 10 & 0  & 0  & 4  & 0  & 2  \\
+g & 12  & 0  & 0  & 9  & 0  & 2  & 0 \\
+\end{array}
+\]
+
+The connected edges are:
+\begin{itemize}
+    \item $G[a][b] = 6$
+    \item $G[a][d] = 15$
+    \item $G[a][e] = 3$
+    \item $G[a][f] = 9$
+    \item $G[a][g] = 12$
+    \item $G[b][c] = 5$
+    \item $G[b][f] = 10$
+    \item $G[c][d] = 7$
+    \item $G[d][g] = 9$
+    \item $G[e][f] = 4$
+    \item $G[f][g] = 2$
+\end{itemize}
+
+Running the program with the following inputs, we get:
+
+\textbf{Brute Force}
+\begin{verbatim}
+    Brute Force algorithm evaluated 720 passes
+
+    === All Valid Routes ===
+    a->b->c->d->e->f->g->a = 36
+    a->b->c->d->e->g->f->a = 29
+    a->b->c->d->f->e->g->a = 34
+    ...                             \\ manually shortened the output
+    a->g->f->e->d->b->c->a = 23
+    a->g->f->e->d->c->b->a = 36
+    
+    === Optimal Route ===
+    a->c->f->d->b->g->e->a = 3
+    
+    Total runtime: 0.002194 seconds
+    Total distance matrix accesses: 5760
+\end{verbatim}
+\textbf{Branch \& Bound}
+\begin{verbatim}
+    Branch and Bound algorithm evaluated 51 passes
+
+    === All Valid Routes ===
+    a->b->c->d->e->f->g->a = 36
+    a->b->c->d->e->g->f->a = 29
+    ...                             \\ manually shortened the output
+    a->c->g->f->d->b->e->a = 5
+    a->c->g->f->d->e->b->a = 8
+
+    === Optimal Route ===
+    a->c->f->d->b->g->e->a = 3
+
+    Total runtime: 0.000258 seconds
+    Total distance matrix accesses: 331
+\end{verbatim}
+
+To summarize the two outputs:
+
+\begin{table}[H]
+    \centering
+        \begin{tabular}{|l|c|c|}
+        \hline
+                \textbf{Property} & \textbf{Brute Force} & \textbf{Branch and Bound} \\
+            \hline
+                Passes Evaluated         & 720   & 51    \\
+            \hline
+                Runtime (seconds)        & 0.002194 & 0.000258 \\
+            \hline
+                Matrix Accesses          & 5760  & 331   \\
+            \hline
+        \end{tabular}
+            \caption{Comparison of Brute Force and Branch and Bound TSP Results}
+\end{table}
+    
+It can be seen that the \textbf{Branch \& Bound} approach can improve the runtime significantly, by effectively pruning paths that are longer than the previous known minimum distance.
+
+Although it should be noted that there will be cases that the minimum will not be found as quick as average case, which might bloat the passes. In average case this is not considered because it is hypothesized and expected to find a really short path in the early runtime of the program.

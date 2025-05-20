@@ -29,10 +29,10 @@ def OptimizedLinearSearch(numbers, value):
     print(f"Passes made: {pass_count}")
     return False
 
-
+size = int(input("Enter array size: "))
 numbers = []
 
-for i in range(6):
+for i in range(size):
     number = int(input(f"Enter value {i + 1}: "))
     numbers.append(number)
 

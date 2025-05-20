@@ -5,7 +5,7 @@
 
 This optimized Linear Search algorithm implements a bidirectional search that aims to improve practical runtime efficiency. Instead of scanning the array in one direction, it compares elements both from left and right ends simultaneously in each iteration. 
 
-By this, it can possibly locate the target value in half the time, especially when the value is located near the boundaries of the list. In addition, to further optimize the algorithm,  a modulo condition is applied before performing a full comparison. This happens by checking whether the last digit of the current element matches the last digit of the target value using the expression $value \% 10$. 
+By this, it can possibly locate the target value in half the time, especially when the value is located near the boundaries of the list. In addition, to further optimize the algorithm,  a modulo condition is applied before performing a full comparison. This happens by checking whether the last digit of the current element matches the last digit of the target value using the expression $value \% 10$.
 
 If the condition is not met, the element is skipped, reducing unnecessary comparisons. In addition, the search terminates immediately once a match is found, ensuring early exit in favorable cases. Although the worst case time complexity stays the same %, this optimized version offers improved runtime performance in many practical scenarios due to its dual direction scanning and digit based filtering.
 
